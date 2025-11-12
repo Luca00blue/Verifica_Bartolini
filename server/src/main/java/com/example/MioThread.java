@@ -60,8 +60,8 @@ public class MioThread extends Thread {
                     int num = Integer.parseInt(comando[1]);
 
                     if ( num == segreto ) {
-                        out.println("OK COORECT in T=" + tries);
-                       
+                    int  t = tries + 1;
+                    out.println("OK COORECT in T=" + t );
                     }else if (num < segreto) {
                         out.println("HINT HIGHER");
 
@@ -81,18 +81,10 @@ public class MioThread extends Thread {
             
             switch (range[0]) {
                 case "RANGE":
-                String a = "" ;
-                String b = "";
-                try {
-                    a = in.readLine(); 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }  
-                try {
-                    b = in.readLine(); 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }  
+                
+                String a = range[1];
+                String b = range[2];
+                  
                 int an = Integer.parseInt(a);
                 int bn = Integer.parseInt(b);
 
