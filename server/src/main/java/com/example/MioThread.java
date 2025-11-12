@@ -19,9 +19,10 @@ public class MioThread extends Thread {
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
     }
-    
+    int a = 0;
+    int b = 101;
     int tries = 0;
-    int segreto = ThreadLocalRandom.current().nextInt(1, 101);
+    int segreto = ThreadLocalRandom.current().nextInt(a, b);
     
     @Override
     public void run() {         
@@ -29,6 +30,7 @@ public class MioThread extends Thread {
 
         String[] comando = {"", ""};
         String[] range = {"","",""};
+        String[] stat = {""};
         String rang = ""; 
 
         while (true) {
@@ -39,7 +41,8 @@ public class MioThread extends Thread {
                 e.printStackTrace();
             }        
             comando = comn.split(" " , 2);
-
+            range = comn.split(" ");
+            stat = comn.split(" " , 3);
             if (comando[0].equals("QUIT")){
                 out.println("BYE"); 
                 try {
@@ -50,8 +53,6 @@ public class MioThread extends Thread {
                 break;
             }
 
-            if (comando[0].equals("GUESS"))
-
             switch (comando[0]) {
               
                 case "GUESS":
@@ -59,7 +60,7 @@ public class MioThread extends Thread {
                     int num = Integer.parseInt(comando[1]);
 
                     if ( num == segreto ) {
-                        out.println("corretto");
+                        out.println("OK COORECT in T=" + tries);
                        
                     }else if (num < segreto) {
                         out.println("HINT HIGHER");
@@ -72,32 +73,49 @@ public class MioThread extends Thread {
                     tries++;
 
                     break;
-                
-                case "STATS":
-
-                    out.println(tries);
 
 
-
-                break;
-
-                case "NEW":
-
-                                    
-                break;
-
+                default:
+                    break;
+            }
+            
+            switch (range[0]) {
                 case "RANGE":
-                int a ;
-                int b ;
-                
-                segreto = ThreadLocalRandom.current().nextInt(1, 101);
+                String a = "" ;
+                String b = "";
+                try {
+                    a = in.readLine(); 
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }  
+                try {
+                    b = in.readLine(); 
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }  
+                int an = Integer.parseInt(a);
+                int bn = Integer.parseInt(b);
+
+                segreto = ThreadLocalRandom.current().nextInt(an, bn);
 
                 break;
 
                 default:
                     break;
             }
-            
+
+            switch (stat[0]) {
+                case "STATS":
+                out.println("INFO RANGE"+ a + b + "TRIES" + tries);
+               
+                case "NEW":
+
+                
+
+
+                default:
+                    break;
+            }
         }
       
         
