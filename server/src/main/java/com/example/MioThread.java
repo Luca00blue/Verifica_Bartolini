@@ -106,7 +106,7 @@ public class MioThread extends Thread {
 
             switch (stat[0]) {
                 case "STATS":
-                out.println("INFO RANGE"+ a + b + "TRIES" + tries);
+                out.println("INFO RANGE "+ a + " " + b + " TRIES " + tries);
                
                 case "NEW":
 
