@@ -29,21 +29,34 @@ public class MioThread extends Thread {
 
         String[] comando = {"", ""};
         String[] range = {"","",""};
+        String rang = ""; 
 
         while (true) {
-            String rang = ""; 
             String comn = "";
+            try {
+                comn = in.readLine(); 
+            } catch (IOException e) {
+                e.printStackTrace();
+            }        
+            comando = comn.split(" " , 2);
 
-            
-            comando = comn.split("" , 2);
-
+            if (comando[0].equals("QUIT")){
+                out.println("BYE"); 
+                try {
+                    socket.close(); 
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
             switch (comando[0]) {
+              
                 case "GUESS":
-                    String inp = "" ;
+                    String inp = " " ;
                     
-                    String[] guess =inp.split("",2);
-
-                    if (guess[1].equals(segreto)) {
+                    String[] guess = inp.split(" ",2);
+                    int num = Integer.parseInt(guess[1]);
+                    if ( num == segreto ) {
                         out.println("corretto");
                     }else
                     {
