@@ -49,25 +49,55 @@ public class MioThread extends Thread {
                 }
                 break;
             }
+
+            if (comando[0].equals("GUESS"))
+
             switch (comando[0]) {
               
                 case "GUESS":
-                    String inp = " " ;
-                    
-                    String[] guess = inp.split(" ",2);
-                    int num = Integer.parseInt(guess[1]);
+
+                    int num = Integer.parseInt(comando[1]);
+
                     if ( num == segreto ) {
                         out.println("corretto");
+                       
+                    }else if (num < segreto) {
+                        out.println("HINT HIGHER");
+
                     }else
                     {
-                        out.println("non corretto");
+                        out.println("HINT LOWER");
+                       
                     }
+                    tries++;
+
                     break;
-            
+                
+                case "STATS":
+
+                    out.println(tries);
+
+
+
+                break;
+
+                case "NEW":
+
+                                    
+                break;
+
+                case "RANGE":
+                int a ;
+                int b ;
+                
+                segreto = ThreadLocalRandom.current().nextInt(1, 101);
+
+                break;
+
                 default:
                     break;
             }
-
+            
         }
       
         
