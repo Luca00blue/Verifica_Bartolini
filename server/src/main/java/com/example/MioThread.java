@@ -61,7 +61,7 @@ public class MioThread extends Thread {
 
                     if ( num == segreto ) {
                     int  t = tries + 1;
-                    out.println("OK COORECT in T=" + t );
+                    out.println("OK CORRECT in T=" + t );
                     }else if (num < segreto) {
                         out.println("HINT HIGHER");
 
@@ -82,14 +82,16 @@ public class MioThread extends Thread {
             switch (range[0]) {
                 case "RANGE":
                 
-                String a = range[1];
-                String b = range[2];
+                String ar = range[1];
+                String br = range[2];
                   
-                int an = Integer.parseInt(a);
-                int bn = Integer.parseInt(b);
+                int an = Integer.parseInt(ar);
+                int bn = Integer.parseInt(br);
 
-                segreto = ThreadLocalRandom.current().nextInt(an, bn);
-
+                a = an;
+                b = bn;
+                segreto = ThreadLocalRandom.current().nextInt(a, b);
+                out.println("OK RANGE " +  a + " " + b );
                 break;
 
                 default:
@@ -98,7 +100,7 @@ public class MioThread extends Thread {
 
             switch (stat[0]) {
                 case "STATS":
-                out.println("INFO RANGE "+ a + " " + b + " TRIES " + tries);
+                out.println("INFO RANGE "+ a + " " + b + "; TRIES " + tries);
                 break;
 
                 case "QUIT":
@@ -110,7 +112,7 @@ public class MioThread extends Thread {
                 }
                 break;
                 case "NEW":
-
+                
                 
                 break;
 
